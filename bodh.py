@@ -85,7 +85,7 @@ def to_dec(num: int, fillz: int) -> str:
     return f"\033[34;1m0d\033[0m{num:0{fillz}d}"
 
 def to_hex(num: int, fillz: int) -> str:
-    return f"\033[34;1m0x\033[0m{num:0{fillz}x}"
+    return f"\033[35;1m0x\033[0m{num:0{fillz}x}"
 
 def fmt_and_display(val: tuple[str, str]) -> str|None:
     funcs_lookup = {
