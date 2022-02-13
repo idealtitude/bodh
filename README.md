@@ -27,10 +27,10 @@ source ~/.bashrc # see note #1 below
 
 Do `bodh 547`, and it will output the following:
 
-> bin:	0b1000100011
-> oct:	0o0000001043
-> dec:	0d0000000547
-> hex:	0x0000000223
+  bin:	0b1000100011
+  oct:	0o0000001043
+  dec:	0d0000000547
+  hex:	0x0000000223
 
 Or `bodh 0x223`, `bodh 0b1000100011`, `bodh 0o1043` (same output for the three of them because it's the same number, 547).
 
@@ -87,5 +87,4 @@ Write the content and exit nano; then do `source ~/.bashrc`, and that's it, you 
 
 **(2)** ”Style Guide for Python Code”
 
-**(3)** spelling of “bodh”: **
-
+**(3)** spelling of “bodh”: *বোধ*
