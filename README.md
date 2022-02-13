@@ -2,6 +2,8 @@
 
 **bodh** stands for Binary Octal Decimal Hexadecimal...
 
+![bodh screenshot](https://raw.githubusercontent.com/idealtitude/bodh/main/doc/bodh_screenshot.png)
+
 It is very simple to use: invoke the command with any **integer** as its (only) argument(*), and it displays it in the 4 formats aforementioned.
 
 (*) If the number is not decimal write it with the proper prefix convention that **bodh** follows: `0b` for binary, `0o` for octal, `0x` for hexadecimal).
