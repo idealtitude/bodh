@@ -1,6 +1,6 @@
 ## bodh
 
-![bodh screenshot](https://raw.githubusercontent.com/idealtitude/bodh/main/doc/bodh_screenshot.png)
+[![bodh screenshot](https://raw.githubusercontent.com/idealtitude/bodh/main/doc/bodh_screenshot.png)](https://raw.githubusercontent.com/idealtitude/bodh/main/doc/bodh_screenshot.png "Click to see the screenshot fullsize")
 
 **bodh** stands for binary octal decimal hexadecimal.
 
