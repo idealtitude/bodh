@@ -28,10 +28,15 @@ source ~/.bashrc # see note #1 below
 
 Do `bodh 547` (or `./bodh.py 547` from bodh folder), and it will output the following:
 
-  bin:	0b1000100011
-  oct:	0o0000001043
-  dec:	0d0000000547
-  hex:	0x0000000223
+>
+> bin:	0b1000100011
+>
+> oct:	0o0000001043
+>
+> dec:	0d0000000547
+>
+> hex:	0x0000000223
+>
 
 Or `bodh 0x223`, `bodh 0b1000100011`, `bodh 0o1043` (same output for the three of them because it's the same number, 547).
 
