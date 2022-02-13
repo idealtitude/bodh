@@ -2,16 +2,17 @@
 
 **bodh** stands for Binary Octal Decimal Hexadecimal...
 
-It is very simple to use: invoke the command with any number as its (only) argument (*), and it displays it in the 4 formats aforementioned.
+It is very simple to use: invoke the command with any number as its (only) argument(*), and it displays it in the 4 formats aforementioned.
 
 (*) If the number is not decimal write it with the proper prefix convention that **bodh** follows: `0b` for binary, `0o` for octal, `0x` for hexadecimal).
 
-*Incise (for beginners! skip it otherwise)*
+*Incise* (for beginners! skip it otherwise)
 
 To use it, simply download and extract, or clone, this repo:
 
 ```bash
 git clone git@github.com:idealtitude/bodh.git
+cd bodh
 ```
 
 Check that `bodh.py` has the adequate permissions to be executed. Then, you can also copy/move/link it in your `~/bin` or `~/.local/bin` directory (1):
@@ -23,9 +24,9 @@ chmod 755 ~/bin/bodh
 source ~/.bashrc # see note #1 below
 ```
 
-**Examples**
+**Example**
 
-Do `bodh 547`, and it will output the following:
+Do `bodh 547` (or `./bodh.py 547` from bodh folder), and it will output the following:
 
   bin:	0b1000100011
   oct:	0o0000001043
@@ -66,7 +67,7 @@ Incidentally, [“bodh”](https://translate.google.fr/?sl=auto&tl=en&text=%E0%A
 *1.1*
 
 ```bash
-nano ~/.bashr
+nano ~/.bashrc
 ```
 
 *1.2*
@@ -83,7 +84,7 @@ export PATH
 
 *1.3*
 
-Write the content and exit nano; then do `source ~/.bashrc`, and that's it, you can now invoke `bodh` from your terminal (type `bodh -h` or `bodh --help` to see the help message).
+Save the content (`ctrl+s` or `ctrl+o`) and exit nano (`ctrtl+x`); then do `source ~/.bashrc`, and that's it, you can now invoke `bodh` from your terminal (type `bodh -h` or `bodh --help` to see the help message).
 
 **(2)** ”Style Guide for Python Code”
 

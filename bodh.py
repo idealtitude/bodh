@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-Documentation, main docstring
+bodh stands for binary octal decimal hexadecimal.
+Ity's a small command line utility that receives a number in argument
+and outputs it in the 4 formats aforementioned.
 """
 
 import sys
@@ -27,7 +29,7 @@ EXIT_FAILURE = 1
 TOKENS_PTN = {
     "bin": re.compile("^(?P<fmt>0b)(?P<num>[0-1]+)$"),
     "oct": re.compile("^(?P<fmt>0o)(?P<num>[0-7]+)$"),
-    "dec": re.compile("^(?P<num>\d+)$"),
+    "dec": re.compile(r"^(?P<num>\d+)$"),
     "hex": re.compile("^(?P<fmt>0x)(?P<num>[0-9A-Fa-f]+)$")
 }
 
@@ -70,7 +72,10 @@ def set_fillz(num: int) -> int:
     return res
 
 def to_bin(num: int, fillz: int) -> str:
-    """Format to binary repr"""
+    """Format to binary repr
+    TODO: one single function would suffice, instead of 4
+    just adding a 3rd paramater to define the kind of representation
+    """
     return f"\033[31;1m0b\033[0m{num:0{fillz}b}"
 
 def to_oct(num: int, fillz: int) -> str:
