@@ -2,7 +2,7 @@
 
 **bodh** stands for Binary Octal Decimal Hexadecimal...
 
-It is very simple to use: invoke the command with any number as its (only) argument(*), and it displays it in the 4 formats aforementioned.
+It is very simple to use: invoke the command with any **integer** as its (only) argument(*), and it displays it in the 4 formats aforementioned.
 
 (*) If the number is not decimal write it with the proper prefix convention that **bodh** follows: `0b` for binary, `0o` for octal, `0x` for hexadecimal).
 
@@ -62,6 +62,17 @@ I had fun to write it, even if I almost got lost from time to time while doing i
 Incidentally, [“bodh”](https://translate.google.fr/?sl=auto&tl=en&text=%E0%A6%AC%E0%A7%8B%E0%A6%A7&op=translate "Google translation of the word 'bodh'") in Bengali means "feeling" (3).
 
 *Incise:* For my projects I often try to use a name of which the acronym can be a word in other languages.
+
+---
+
+### TODO
+
++ [ ] add support for signed numbers
++ [ ] add support for float numbers (*)
++ [ ] add suppurt for complex numbers
++ [ ] add support for base 60 conversion
+
+(*) Relevant link: [S.O. Discussion](https://stackoverflow.com/questions/16444726/binary-representation-of-float-in-python-bits-not-hex/16444778#16444778 "Binary representation of float in Python")
 
 ---
 
