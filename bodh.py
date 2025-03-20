@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.10
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
@@ -17,7 +17,7 @@ import argparse
 
 # App version
 __author__  = "idealtitude"
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __license__ = "MT108"
 
 # Constants
@@ -47,19 +47,13 @@ def parse_format(uval: str) -> tuple[str|None, str|None]:
     return (fmt, val)
 
 def parse_int(val: str, fmt: int) -> int | None:
-    tmp: int = 0
     ret: int | None = None
-    chk: bool = False
 
     try:
-        tmp = int(val, fmt)
-        chk = True
+        ret = int(val, fmt)
     except TypeError as ex:
+        ret = None
         print(f"Error, can't convert \033[1m{val}\033[0m to int.\n{ex}")
-
-    if chk:
-        ret = tmp
-        return ret
 
     return ret
 
@@ -71,23 +65,32 @@ def set_fillz(num: int) -> int:
 
     return res
 
-def to_bin(num: int, fillz: int) -> str:
+def to_bin(num: int, fillz: int, raw: bool) -> str:
     """Format to binary repr
     TODO: one single function would suffice, instead of 4
     just adding a 3rd paramater to define the kind of representation
     """
-    return f"\033[31;1m0b\033[0m{num:0{fillz}b}"
+    if not raw:
+        return f"\033[31;1m0b\033[0m{num:0{fillz}b}"
 
-def to_oct(num: int, fillz: int) -> str:
-    return f"\033[32;1m0o\033[0m{num:0{fillz}o}"
+    return f"{num:0{fillz}b}"
 
-def to_dec(num: int, fillz: int) -> str:
-    return f"\033[34;1m0d\033[0m{num:0{fillz}d}"
+def to_oct(num: int, fillz: int, raw: bool) -> str:
+    if not raw:
+        return f"\033[32;1m0o\033[0m{num:0{fillz}o}"
+    return f"{num:0{fillz}o}"
 
-def to_hex(num: int, fillz: int) -> str:
-    return f"\033[35;1m0x\033[0m{num:0{fillz}x}"
+def to_dec(num: int, fillz: int, raw: bool) -> str:
+    if not raw:
+        return f"\033[34;1m0d\033[0m{num:0{fillz}d}"
+    return f"{num:0{fillz}d}"
 
-def fmt_and_display(val: tuple[str, str]) -> str|None:
+def to_hex(num: int, fillz: int, raw: bool) -> str:
+    if not raw:
+        return f"\033[35;1m0x\033[0m{num:0{fillz}x}"
+    return f"{num:0{fillz}x}"
+
+def fmt_and_display(val: tuple[str, str], raw: bool, full: str = "all") -> str|None:
     funcs_lookup = {
         "bin": to_bin,
         "oct": to_oct,
@@ -109,13 +112,36 @@ def fmt_and_display(val: tuple[str, str]) -> str|None:
     res_str: str = ""
 
     if get_int is not None:
-        for key, fn in funcs_lookup.items():
-            # if val[0] == key:
-                # res_str += f"{key}:\t{val[1]}\n"
-                # continue
-
-            sfillz: int = set_fillz(get_int)
-            res_str += f"\033[1m{key}:\033[0m\t{fn(get_int, sfillz)}\n"
+        if full == "all":
+            for key, fn in funcs_lookup.items():
+                sfillz: int = set_fillz(get_int)
+                if not raw:
+                    res_str += f"\033[1m{key}:\033[0m\t{fn(get_int, sfillz, raw)}\n"
+                res_str += f"{fn(get_int, sfillz, raw)}\n"
+        elif full == "bin":
+            sfillz : int = set_fillz(get_int)
+            if not raw:
+                res_str = f"\033[1mbin:\033[0m\t{to_bin(get_int, sfillz, raw)}\n"
+            sfillz = 0
+            res_str = f"{to_bin(get_int, sfillz, raw)}\n"
+        elif full == "oct":
+            sfillz : int = set_fillz(get_int)
+            if not raw:
+                res_str = f"\033[1moct:\033[0m\t{to_oct(get_int, sfillz, raw)}\n"
+            sfillz = 0
+            res_str = f"{to_oct(get_int, sfillz, raw)}\n"
+        elif full == "dec":
+            sfillz : int = set_fillz(get_int)
+            if not raw:
+                res_str = f"\033[1mdec:\033[0m\t{to_dec(get_int, sfillz, raw)}\n"
+            sfillz = 0
+            res_str = f"{to_dec(get_int, sfillz, raw)}\n"
+        elif full == "hex":
+            sfillz : int = set_fillz(get_int)
+            if not raw:
+                res_str = f"\033[1mhex:\033[0m\t{to_hex(get_int, sfillz, raw)}\n"
+            sfillz = 0
+            res_str = f"{to_hex(get_int, sfillz, raw)}\n"
 
     if len(res_str) > 0:
         return res_str.strip()
@@ -130,6 +156,12 @@ def get_args() -> argparse.Namespace:
     )
 
     parser.add_argument("number", nargs=1, help="The number to format and display; can be either binary, octal, decimal, or hexadecimal. Except for the decimal version, all others must have their respective format prefix (0b, 0o, and 0x).")
+    parser.add_argument("-a", "--all", action="store_true", help="Display in the 4 formats, this is the default, can be omitted")
+    parser.add_argument("-b", "--bin", action="store_true", help="Display the binary format")
+    parser.add_argument("-o", "--oct", action="store_true", help="Display the octal format")
+    parser.add_argument("-d", "--dec", action="store_true", help="Display the decimal format")
+    parser.add_argument("-x", "--hex", action="store_true", help="Display the hexadecimal format")
+    parser.add_argument("-r", "--raw", action="store_true", help="Display raw, without formatting")
     parser.add_argument(
         "-v", "--version", action="version", version=f"%(prog)s {__version__}"
     )
@@ -143,6 +175,21 @@ def main() -> int:
     args: argparse.Namespace = get_args()
 
     val: str = args.number[0]
+    raw: bool = False
+    full: str = "all"
+
+    if args.all:
+        pass
+    if args.bin:
+        full = "bin"
+    if args.oct:
+        full = "oct"
+    if args.dec:
+        full = "dec"
+    if args.hex:
+        full = "hex"
+    if args.raw:
+        raw = True
 
     val_infos: tuple[str|None, str|None] = parse_format(val)
 
@@ -150,7 +197,7 @@ def main() -> int:
         print(f"Invalid argument! The expression \033[1m{val}\033[0m can't be evaluated to one a the required format.\nUse bodh -h to display the help. Exiting now...")
         return EXIT_FAILURE
 
-    res = fmt_and_display(val_infos)
+    res = fmt_and_display(val_infos, raw, full)
 
     if res is None:
         print(f"An error occured with argument \033[1m{val}\033[0m, it can not be parsed and/or formated. Exiting now...")

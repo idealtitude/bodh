@@ -1,5 +1,5 @@
 # Py exe
-PY=python3.10
+PY=python
 PYFLAGS=-m
 SRC=timing_test
 
